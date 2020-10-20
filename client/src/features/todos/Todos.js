@@ -1,52 +1,69 @@
+
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { getTodo, display, selectTodo } from "../todos/todosSlice.js"
+import { getTodo, selectTodo, addTodo, removeTodo, updateTodo } from "../todos/todosSlice.js"
 
 export function Todos() {
-
   const dispatch = useDispatch()
   const todo = useSelector(selectTodo)
-  const [description, setDescription] = useState("");
+  const [inputText, setInputText] = useState("")
 
   useEffect(() => {
     dispatch(getTodo(todo))
   }, [])
 
-  function handleChange(e) {
-    setDescription(e.target.value)
+  function handleSubmit(e) {
+    e.preventDefault()
+    dispatch(addTodo(inputText))
+    setInputText("");
   }
-  console.log(description)
+  
+  function handleUpdate(id, status) {
+    dispatch(updateTodo({id, status}))
+  }
+  
+  function handleDelete(item) {
+    dispatch(removeTodo(item.id))
+  }
 
   return (
-  <div>
-    <div className="container">
-      <h1 className="heading">Input Todos List</h1>
-      <form 
-        className="form">
-          <input 
-          className="input"
-          type="text"
-          value={description}
-          onChange={handleChange}
-          placeholder="enter your todo here"/>
-          <button className="submitBtn">+</button>
-      </form>
-      <div className="itemHeading">
-      <span>description</span>
-       <span>status</span>
-       </div>
-    </div>
-      <div className="wrap">
-      <ul>
-        {todo.map((todo) => (
-              <li>
-                <span>{todo.description}</span>
-                <button className="status">{todo.status}</button>
-                <button className="delete" >x</button>
-              </li>
-        ))}
-      </ul>
-    </div>
-</div>
+      <>
+        <div className="container">
+          <h1 className="heading">Input Todos List</h1>
+
+          <form 
+            onSubmit={handleSubmit}
+            className="form">
+              <input 
+              className="input"
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder="enter your todo here"/>
+              <button type="submit" className="submitBtn">+</button>
+          </form>
+
+          <div className="itemHeading">
+          <span>description</span>
+          <span>status</span>
+          </div>
+        </div>
+
+        <div className="wrap">
+          <ul>
+            {todo.map((item) => (
+                <li key={item.id} id={item.id}>
+                    <span>{item.description}</span>  
+                    <div className="status">{item.status}</div>
+                    <button className="statusBtns completed" type="submit" onClick={() => handleUpdate(item.id, 'completed')}>completed</button>
+                    <button className="statusBtns active" type="submit" onClick={() => handleUpdate(item.id, 'active')}>active</button>
+                    <button 
+                    onClick={() => handleDelete(item)}
+                    className="delete">x</button>
+                </li>
+            ))}
+          </ul>
+        </div>
+    </>
   )
 }

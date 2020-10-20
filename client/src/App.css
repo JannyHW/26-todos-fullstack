@@ -18,12 +18,13 @@
 }
 
 .heading {
-  font-weight: lighter;
-  font-size: 3rem;
-  text-align: center;
-  color: #ead8d8;
   margin: 5% auto;
+  font-size: 3rem;
+  color: #ead8d8;
+  text-align: center;
+  font-weight: lighter;
 }
+
 .form {
   display: flex;
   justify-content: center;
@@ -47,27 +48,35 @@
 .input {
   width: 100%;
   text-indent: 20px;
+  border: 1px solid #ccc;
+  border-radius:  10px 0  0 10px;
 }
+
 .submitBtn {
   width: 10%;
   font-weight: bold;
   color: #d5a8a8;
+  border: 1px solid #ccc;
+  border-radius: 0 10px 10px 0;
+  background-color: white;
+  box-shadow: 2px 2px 2px grey;
+  transform: scale(1);
 }
 
 input::placeholder {
   font-size: 18px;
+  text-indent: 25px;
 }
 
-.itemHeading { 
-  padding-top:30px;
+.itemHeading {
+  padding-top: 30px;
   display: flex;
+  margin-left: 130px;
   justify-content: space-between;
-  width: 65%;
-  margin: auto;
+  width: 38%;
   font-weight: lighter;
   font-size: 24px;
   color: #7e7878;
-
 }
 
 .wrap {
@@ -78,13 +87,17 @@ input::placeholder {
   height: auto;
   background: white;
   padding-bottom: 30px;
+  border: 1px solid #ccc;
+  background-color: white;
+  box-shadow: 2px 2px 2px grey;
+  transform: scale(1);
 }
 
 li {
   display: flex;
   justify-content: space-between;
   border: 3px solid white;
-  padding: 15px;
+  padding: 15px 20px 15px 30px;
   list-style: none;
   width: 100%;
   outline: none;
@@ -98,22 +111,52 @@ li {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.delete, .status {
+.delete,
+.status {
   color: #d5a8a8;
   background: transparent;
   border: none;
   outline: none;
-  font-size: 20px;
-  cursor: pointer;
+  font-size: 22px;
+}
+
+.delete {
+  width: 4%;
+  padding: 3px;
+  border-radius: 50%;
 }
 
 button:hover {
-  background:lightgrey;
-  padding: 3px;
+  background: lightgrey;
 }
+
 .status {
   position: relative;
-  left: 175px;
+  left: 120px;
 }
 
+.statusBtns {
+  padding: 0 8px;
+  outline: none;
+  color: grey;
+  font-weight: bolder;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 2px 2px 2px grey;
+  transform: scale(1);
+}
 
+.completed {
+  position: relative;
+  left: 110px;
+}
+
+.active {
+  position: relative;
+  left: 50px;
+}
+
+:focus {
+  outline: 0;
+}
